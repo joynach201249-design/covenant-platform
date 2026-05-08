@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react'
 import { supabase } from '@/lib/supabase/client'
-import Link from 'next/link'
 
 export default function Dashboard() {
   const [loading, setLoading] = useState(true)
@@ -14,7 +13,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     const getData = async () => {
-      const {  { session } } = await supabase.auth.getSession()
+      const { data: { session } } = await supabase.auth.getSession()
       if (!session) return
 
       setUser(session.user)
@@ -46,8 +45,8 @@ export default function Dashboard() {
         phone: phone,
         updated_at: new Date()
       })
-    if (error) {
-      alert('Error: ' + error.message)
+
+    if (error) {      alert('Error: ' + error.message)
     } else {
       alert('Profile saved!')
     }
@@ -95,8 +94,8 @@ export default function Dashboard() {
             <input 
               value={phone} 
               onChange={(e) => setPhone(e.target.value)}
-              className="w-full p-3 border rounded bg-background"              placeholder="Enter phone number"
-            />
+              className="w-full p-3 border rounded bg-background"
+              placeholder="Enter phone number"            />
           </div>
 
           <button 
