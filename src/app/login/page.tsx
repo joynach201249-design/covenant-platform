@@ -17,7 +17,7 @@ export default function Login() {
       setMessage('Error: ' + error.message)
     } else {
       setMessage('Success! Redirecting...')
-      window.location.href = '/'
+      window.location.href = '/dashboard'
     }
   }
 
