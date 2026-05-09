@@ -16,7 +16,8 @@ export default function Journal() {
 
   useEffect(() => {
     const getData = async () => {
-      const {  { session } } = await supabase.auth.getSession()
+      const { data } = await supabase.auth.getSession()
+      const session = data.session
       if (!session) return
       setUser(session.user)
       await fetchEntries()
