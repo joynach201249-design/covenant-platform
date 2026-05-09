@@ -14,7 +14,8 @@ export default function Dashboard() {
 
   useEffect(() => {
     const getData = async () => {
-      const {  { session } } = await supabase.auth.getSession()
+      // CORRECTED LINE BELOW:
+      const { data: { session } } = await supabase.auth.getSession()
       if (!session) return
 
       setUser(session.user)
@@ -94,8 +95,8 @@ export default function Dashboard() {
             <label className="block text-sm font-medium mb-1">Phone Number</label>
             <input 
               value={phone} 
-              onChange={(e) => setPhone(e.target.value)}
-              className="w-full p-3 border rounded bg-background"              placeholder="Enter phone number"
+              onChange={(e) => setPhone(e.target.value)}              className="w-full p-3 border rounded bg-background"
+              placeholder="Enter phone number"
             />
           </div>
 
@@ -110,7 +111,7 @@ export default function Dashboard() {
 
         <div className="border-t pt-6">
           <Link href="/journal" className="block w-full py-3 bg-blue-600 text-white rounded-lg font-bold text-center">
-            📖 Family Journal
+             Family Journal
           </Link>
         </div>
       </div>
