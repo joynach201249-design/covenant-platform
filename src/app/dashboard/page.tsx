@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { supabase } from '@/lib/supabase/client'
+import Link from 'next/link'
 
 export default function Dashboard() {
   const [loading, setLoading] = useState(true)
@@ -13,7 +14,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     const getData = async () => {
-      const { data: { session } } = await supabase.auth.getSession()
+      const {  { session } } = await supabase.auth.getSession()
       if (!session) return
 
       setUser(session.user)
@@ -45,8 +46,8 @@ export default function Dashboard() {
         phone: phone,
         updated_at: new Date()
       })
-
-    if (error) {      alert('Error: ' + error.message)
+    if (error) {
+      alert('Error: ' + error.message)
     } else {
       alert('Profile saved!')
     }
@@ -68,7 +69,7 @@ export default function Dashboard() {
           <button onClick={handleLogout} className="text-sm text-red-500">Logout</button>
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-4 mb-6">
           <div>
             <label className="block text-sm font-medium mb-1">Full Name</label>
             <input 
@@ -94,8 +95,8 @@ export default function Dashboard() {
             <input 
               value={phone} 
               onChange={(e) => setPhone(e.target.value)}
-              className="w-full p-3 border rounded bg-background"
-              placeholder="Enter phone number"            />
+              className="w-full p-3 border rounded bg-background"              placeholder="Enter phone number"
+            />
           </div>
 
           <button 
@@ -105,6 +106,12 @@ export default function Dashboard() {
           >
             {saving ? 'Saving...' : 'Save Profile'}
           </button>
+        </div>
+
+        <div className="border-t pt-6">
+          <Link href="/journal" className="block w-full py-3 bg-blue-600 text-white rounded-lg font-bold text-center">
+            📖 Family Journal
+          </Link>
         </div>
       </div>
     </div>
